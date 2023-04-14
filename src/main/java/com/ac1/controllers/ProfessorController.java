@@ -42,13 +42,8 @@ public class ProfessorController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> removeUser(@RequestParam Long id) {
+    public ResponseEntity<String> removeProfessor(@RequestParam Long id) {
         return professorService.deleteProfessor(id);
-    }
-
-    @PostMapping("/agenda")
-    public ResponseEntity<ProfessorEntity> getAgenda(@RequestParam String id) {
-        return null;
     }
 
     @PostMapping("/cursos")

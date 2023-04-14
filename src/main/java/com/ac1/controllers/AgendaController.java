@@ -26,7 +26,7 @@ public class AgendaController {
     private AgendaService agendaService;
 
     @PostMapping
-    public ResponseEntity<String> createCurso(@RequestBody AgendaDTO agenda, @RequestParam Long curso,
+    public ResponseEntity<String> createAgenda(@RequestBody AgendaDTO agenda, @RequestParam Long curso,
             @RequestParam Long professor) throws ParseException {
         return agendaService.createAgenda(agenda, curso, professor);
     }

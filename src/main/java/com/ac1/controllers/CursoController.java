@@ -40,7 +40,7 @@ public class CursoController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> removeUser(@RequestParam Long id) {
+    public ResponseEntity<String> removeCurso(@RequestParam Long id) {
         return cursoService.deleteCurso(id);
     }
 
