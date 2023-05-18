@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ac1.dto.AgendaDTO;
 import com.ac1.dto.ProfessorAgendaDTO;
-import com.ac1.entities.AgendaEntity;
 import com.ac1.services.AgendaService;
 
 @RestController
@@ -32,7 +31,7 @@ public class AgendaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AgendaEntity>> getAgendas() {
+    public ResponseEntity<List<AgendaDTO>> getAgendas() {
         return agendaService.getAgendas();
     }
 

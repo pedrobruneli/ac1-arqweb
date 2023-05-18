@@ -21,8 +21,6 @@ import com.ac1.repositories.AgendaRepository;
 import com.ac1.repositories.CursoRepository;
 import com.ac1.repositories.ProfessorRepository;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
-
 @Service
 public class AgendaService {
 
@@ -44,7 +42,7 @@ public class AgendaService {
         AgendaEntity entity = modelMapper.map(agenda, AgendaEntity.class);
         entity.setCursos(curso);
         entity.setProfessores(professor);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH Z");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss Z");
         entity.setStart_date(format.parse(agenda.getStart_date() + " UTC"));
         entity.setEnd_date(format.parse(agenda.getEnd_date() + " UTC"));
         if (!checkDateAgenda(professorId, entity.getStart_date(), entity.getEnd_date())) {
@@ -57,8 +55,14 @@ public class AgendaService {
         return ResponseEntity.status(201).build();
     }
 
-    public ResponseEntity<List<AgendaEntity>> getAgendas() {
-        return ResponseEntity.status(200).body(this.agendaRepository.findAll());
+    public ResponseEntity<List<AgendaDTO>> getAgendas() {
+        List<AgendaEntity> agendas = this.agendaRepository.findAll();
+        List<AgendaDTO> agendaDTOs = new ArrayList<>();
+        for (AgendaEntity agenda : agendas) {
+            AgendaDTO dto = modelMapper.map(agenda, AgendaDTO.class);
+            agendaDTOs.add(dto);
+        }
+        return ResponseEntity.status(200).body(agendaDTOs);
     }
 
     public ResponseEntity<String> deleteAgenda(Long id) {
